@@ -1,0 +1,27 @@
+
+‘e denare (soldi in gioco)
+
+ichiro iwamoto (nome protagonista)
+
+Scugnizzu (titolo)
+
+de luca (confidente)
+
+alberto angela (ultimo persona amanti)
+
+/*
+'o culo (tarocco fortuna)
+'a disgrazia (tarocco torre)
+'o scemo (tarocco il matto)
+'a gguardia (tarocco giustizia)
+Sant'Antonio (tarocco fede)
+'a funa n'ganna (tarocco impiccato)
+‘o scartellato/‘o viecchio (tarocco eremita)
+‘o totaro int’a chitarra/sott’e ‘ncoppa (tarocco amanti)
+l’ommo ‘e mmerda (tarocco imperatore)
+‘e riavulille (tarocco diavolo)
+‘a bella figliola['a mignotta] (tarocco imperatrice)
+‘o mariuolo (tarocco jester)
+
+manca mago,carro,papessa,ierofante,sole,luna,stelle
+*/
