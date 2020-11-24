@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FilesStorageServiceImpl implements FilesStorageService {
 
-	private final Path root = Paths.get("../progetto-prova-frontend/public");
+	private final Path root = Paths.get("../project-react/public");
 
 	private static boolean isDirEmpty(final Path directory) throws IOException {
 		try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(directory)) {
@@ -50,7 +50,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
 			throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
 		}
 	}
-
+	
 	@Override
 	public Resource load(String filename) {
 		try {
@@ -76,6 +76,16 @@ public class FilesStorageServiceImpl implements FilesStorageService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void delete(String filename) {
+		
+		try {
+            Files.delete(root.resolve(filename));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 
 	@Override

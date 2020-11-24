@@ -33,7 +33,7 @@ public class UserController {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	FilesStorageService storageService;
 
@@ -71,14 +71,67 @@ public class UserController {
 
 		return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
 	}
-	
+
 	@DeleteMapping("/deleteFiles")
 	public void deleteFiles() {
-		
+
 		System.out.println("entro qui dentro?");
-		
+
 		storageService.deleteAll();
 
+	}
+
+	@DeleteMapping("/deleteSingleFile/{filename}")
+	public void deleteSingleFile(@PathVariable String filename) {
+
+		//System.out.println("stampo il filename in arrivo: " + filename);
+		
+		//String fileToBeDeleted = filename.replaceAll("[^A-Za-z0-9]", "");
+		
+		String fileToBeDeleted = "";
+		
+		//System.out.println("stampo " + fileToBeDeleted);
+
+		List<FileInfo> fileInfos = storageService.loadAll().map(path -> {
+			String filenameOriginal = path.getFileName().toString();
+			String url = MvcUriComponentsBuilder
+					.fromMethodName(UserController.class, "getFile", path.getFileName().toString()).build().toString();
+
+			return new FileInfo(filenameOriginal, url);
+		}).collect(Collectors.toList());
+
+		for (int i = 0; i < fileInfos.size(); i++) {
+
+			//System.out.println("stampo nome 1 " + fileInfos.get(i).getName());
+			
+			if (('"' + fileInfos.get(i).getName() + '"').equals(filename)) {
+
+				//System.out.println("CAZZOOOOOO " + fileInfos.get(i).getName());
+				
+				//fileInfos.remove(i);
+				
+				fileToBeDeleted = fileInfos.get(i).getName();
+			}
+	
+		}
+		
+		System.out.println("stampo " + fileToBeDeleted);
+		
+		storageService.delete(fileToBeDeleted);
+		
+		/*
+		for (int i = 0; i < fileInfos.size(); i++) {
+			
+			System.out.println("stampo nome 2 " + fileInfos.get(i).getName());
+
+			if (fileInfos.get(i).getName().equals(filename)) {
+
+				System.out.println("stampo nome " + fileInfos.get(i).getName());
+			}
+
+		}
+		*/
+		
 	}
 
 	@GetMapping("/files/{filename:.+}")
@@ -88,4 +141,5 @@ public class UserController {
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
 				.body(file);
 	}
+
 }

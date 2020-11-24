@@ -1,0 +1,18 @@
+{
+"presets": [
+    "es2015",
+    "env",
+    "react",
+    "stage-2"
+  ]
+},
+
+{
+  "plugins": [
+    "jsx-control-statements",
+    "transform-react-inline-elements",
+    "transform-es2015-arrow-functions",
+    "check-es2015-constants",
+    "transform-es2015-block-scoping"
+  ]
+}
